@@ -1,0 +1,231 @@
+/* Footer Variables Alignment */
+:root {
+  --footer-bg: #1e293b;       /* Dark Structural Slate */
+  --footer-bottom-bg: #0f172a;/* Deep Dark Charcoal Base */
+  --accent-orange: #f26419;   /* Construction Brand Color */
+  --text-light: #f8fafc;
+  --text-dim: #94a3b8;
+  --white-pure: #ffffff;
+  --transition-fast: all 0.2s ease-in-out;
+}
+
+.main-footer {
+  background-color: var(--footer-bg);
+  color: var(--text-light);
+  padding: 5rem 0 0 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+
+/* FOOTER COLUMNS CONFIGURATION */
+.footer-column h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.8rem 0;
+  letter-spacing: 0.5px;
+}
+
+.accent-line-footer {
+  width: 35px;
+  height: 3px;
+  background-color: var(--accent-orange);
+  margin-bottom: 1.8rem;
+  border-radius: 2px;
+}
+
+/* CONTACT LIST ADJUSTMENTS */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.contact-item.alignment-fix {
+  align-items: flex-start; /* Keeps multi-line address look clean */
+}
+
+.footer-icon {
+  color: var(--accent-orange);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.footer-icon.whatsapp-icon {
+  color: #25d366; /* Authentic WhatsApp Green for pop */
+}
+
+.structural-marker {
+  margin-top: 0.2rem;
+}
+
+.contact-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: var(--transition-fast);
+}
+
+.contact-link:hover {
+  color: var(--white-pure);
+}
+
+.address-text {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* QUICK NAVIGATION LINKS */
+.q-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.q-links li {
+  margin-bottom: 0.8rem;
+}
+
+.q-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: var(--transition-fast);
+  display: inline-block;
+}
+
+.q-links a:hover {
+  color: var(--accent-orange);
+  transform: translateX(4px); /* Subtle indentation animation on hover */
+}
+
+/* BUSINESS HOURS CARD STRUCTURE */
+.hours-block {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.hours-block .days {
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.hours-block .time {
+  color: var(--text-dim);
+  margin: 0.2rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+.closed-days {
+  padding-left: 1.9rem;
+}
+
+.status-closed {
+  color: #ef4444; /* Industrial Red for 'Closed' */
+  font-weight: 600;
+  margin: 0.2rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+/* SOCIAL CONNECT PANEL */
+.social-text {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.social-media-icons {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.social-media-icons a {
+  color: var(--text-light);
+  background-color: rgba(255, 255, 255, 0.05);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: var(--transition-fast);
+}
+
+.social-media-icons a:hover {
+  background-color: var(--accent-orange);
+  color: var(--white-pure);
+  transform: translateY(-3px);
+}
+
+/* FOOTER BASE LEGALS */
+.footer-bottom {
+  background-color: var(--footer-bottom-bg);
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bottom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.bottom-container p {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.legal-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.legal-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: var(--transition-fast);
+}
+
+.legal-links a:hover {
+  color: var(--white-pure);
+}
+
+.legal-links .divider {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.85rem;
+}
+
+/* MOBILE SCALING BREAKPOINT */
+@media (max-width: 600px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .bottom-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
