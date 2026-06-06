@@ -284,7 +284,42 @@ body {
 .showcase-item:hover img {
   transform: scale(1.1);
 }
+/* Ensure the parent preview item container scales to its grid cell */
+.static-showcase-grid .showcase-item,
+.interactive-uploader-panel .uploaded-preview-container,
+div[class*="-card"] {
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
 
+/* Force the rendered image to explicitly scale to the wrapper container dimensions */
+.showcase-item img,
+.uploaded-preview-container img,
+.interactive-uploader-panel img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  min-height: 180px; /* Safeguards layout height consistency */
+  object-fit: cover !important; /* Prevents aspect-ratio stretching */
+  display: block !important;
+}
+/* Structural patch for the upload layout engine framework */
+.upload-queue-modal, 
+.upload-container,
+.portal-glass-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Enforce fluid sizing on the direct image display area inside the uploader */
+.upload-queue-modal img,
+div[class*="upload"] img {
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
 /* INTERACTIVE PANEL CONTAINER */
 .interactive-uploader-panel {
   background: var(--white);
@@ -337,21 +372,219 @@ body {
   font-size: 0.9rem;
 }
 
-/* RESPONSIVE DESIGN */
+/* ==========================================================================
+   COMPREHENSIVE RESPONSIVE DESIGN (TABLETS & MOBILE SMARTPHONES)
+   ========================================================================== */
+
+/* 1. LARGE TABLETS & SMALL LAPTOPS (1024px Viewports and below) */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 1.2rem 5%;
+  }
+
+  .projects-hero {
+    padding: 7rem 5% 5rem 5%;
+  }
+
+  /* Keeps value proposition cards cleanly in a 3-column row on small laptops */
+  .value-props {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem; /* Tightens the spacing slightly to fit layout constraints */
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .static-showcase-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 2. PORTRAIT TABLETS (768px Viewports and below) */
 @media (max-width: 768px) {
-  .navbar { padding: 1rem 5%; }
-  .hamburger { display: block; }
+  .navbar { 
+    padding: 1rem 5%; 
+  }
+  
+  .hamburger { 
+    display: block; 
+    outline: none;
+  }
+  
   .navbar .links {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 100%; left: 0; width: 100%;
+    top: 100%; 
+    left: 0; 
+    width: 100%;
     background: var(--white);
-    padding: 1.5rem;
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    padding: 1.5rem 2rem;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+    gap: 1.2rem;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .navbar .links.show { 
+    display: flex; 
+  }
+
+  .hero-content h1 { 
+    font-size: 2.4rem; 
+    line-height: 1.2;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+  }
+/* Ensures project cards cannot expand beyond their parent container width on mobile */
+.project-card, .showcase-item, .interactive-uploader-panel {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+  .value-props {
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1rem; /* Compact layout spacing for mid-tier screens */
+    margin-top: -4rem; /* Keeps the layered placement over the hero section balanced */
+    margin-bottom: 4rem;
+  }
+
+  .prop-card {
+    padding: 1.5rem 1rem; /* Compact padding prevents text elements from squeezing or breaking */
+    text-align: center; /* Centers icons and content for a clean grid aesthetic */
+  }
+  
+  .prop-card h3 {
+    font-size: 1.1rem; /* Gently scales titles to preserve horizontal layout space */
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr); /* Maintains a 2-column project view layout on tablets */
     gap: 1.5rem;
   }
-  .navbar .links.show { display: flex; }
-  .hero-content h1 { font-size: 2.2rem; }
-  .gallery-showcase { padding: 1rem; }
+
+  .gallery-showcase { 
+    padding: 1.5rem; 
+    margin-bottom: 4rem;
+  }
+
+  .static-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .showcase-item {
+    height: 180px;
+  }
+
+  .cta-banner {
+    padding: 3.5rem 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .cta-banner h2 {
+    font-size: 1.8rem;
+  }
+  /* Core Responsive Boundary Rules */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+/* Fixes dynamic image uploads inside your interactive preview panel */
+.interactive-uploader-panel img,
+.interactive-uploader-panel .uploaded-preview-container {
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain; /* Keeps the uploaded document or image crisp and legible */
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.static-showcase-grid .showcase-item,
+  .interactive-uploader-panel .uploaded-preview-container,
+  .project-card {
+    margin-left: 0 !important;   /* Cancels out any accidental offset pushes */
+    margin-right: 0 !important;  /* Keeps the card cleanly snapped inside the container lines */
+    left: 0 !important;          /* Resets any legacy absolute positioning rules */
+    right: 0 !important;
+    width: 100% !important;      /* Forces fluid execution across the smartphone screen width */
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .gallery-showcase,
+  .interactive-uploader-panel {
+    padding: 1rem !important;
+    display: block !important; /* Forces layout tracking back into a predictable vertical stack */
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* 3. SMALL MOBILE PHONES (480px Viewports and below) */
+@media (max-width: 480px) {
+  .hero-content h1 { 
+    font-size: 1.9rem; 
+  }
+ .projects-page-container {
+    padding: 0 1rem; /* Margins scaled for small phone displays */
+  }
+  .interactive-uploader-panel {
+    padding: 1.5rem 1rem;
+  }
+  /* Stacks cleanly on actual hand-held smartphones where horizontal room runs out */
+  .value-props {
+    grid-template-columns: 1fr;
+    margin-top: -2rem; 
+    gap: 1.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr; /* Switch to single card stack view for easier scrolling phone targets */
+  }
+
+  .static-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .showcase-item {
+    height: 200px;
+  }
+
+  .cta-btn {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .gallery-showcase,
+  .interactive-uploader-panel {
+    padding: 1rem !important;
+    display: block !important; /* Forces layout tracking back into a predictable vertical stack */
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Clear out horizontal margins or absolute pushes breaking the preview card */
+  .static-showcase-grid .showcase-item,
+  .interactive-uploader-panel .uploaded-preview-container,
+  .project-card {
+    margin-left: 0 !important;   /* Cancels out any accidental offset pushes */
+    margin-right: 0 !important;  /* Keeps the card cleanly snapped inside the container lines */
+    left: 0 !important;          /* Resets any legacy absolute positioning rules */
+    right: 0 !important;
+    width: 100% !important;      /* Forces fluid execution across the smartphone screen width */
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Re-align interior absolute action overlays like the delete trash button icon */
+  .review-delete-btn-overlay,
+  .uploaded-preview-container button,
+  div[class*="-delete"] {
+    top: 12px !important;
+    right: 12px !important;      /* Anchors your trash button securely inside the top right corner */
+    left: auto !important;       /* Prevents the button from stretching across the layout cell */
+  }
 }

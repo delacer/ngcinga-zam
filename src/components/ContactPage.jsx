@@ -1,12 +1,54 @@
 // src/components/ContactPage.jsx
 import React, { useState } from "react";
-// 1. Import Link from your routing framework to enable immediate transitions
 import { Link } from "react-router-dom"; 
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaWhatsapp, FaDirections, FaPaperPlane } from "react-icons/fa";
 import "./ContactPage.css";
 
 const ContactPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  
+  // Controlled form state tracking variables
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: ""
+  });
+
+  // Handle changes across input fields dynamically
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  // Process data validation and redirect string generation on submit
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const primaryWhatsAppNumber = "27784102099"; // Target business line configuration
+    
+    // Constructing a clean, highly legible message structure for the receiver
+    const whatsappText = 
+`*New Quote Inquiry - Ngcinga Zam*
+----------------------------------
+*Name:* ${formData.name}
+*Phone:* ${formData.phone || "Not Provided"}
+*Email:* ${formData.email}
+
+*Project Description:*
+${formData.message}
+----------------------------------`;
+
+    // Encode text parameters safely to prevent character breaking
+    const encodedMessage = encodeURIComponent(whatsappText);
+    const whatsappUrl = `https://wa.me/${primaryWhatsAppNumber}?text=${encodedMessage}`;
+
+    // Open up WhatsApp workspace environment seamlessly in a safe background thread
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <>
@@ -22,7 +64,6 @@ const ContactPage = () => {
         >
           {menuOpen ? "✕" : "☰"}
         </button>
-        {/* Changed standard <a> hrefs to <Link to="..."> */}
         <ul className={`links ${menuOpen ? "show" : ""}`}>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/services">Services</Link></li>
@@ -109,30 +150,58 @@ const ContactPage = () => {
               <div className="accent-line-short"></div>
               <p className="form-intro">Fill out the form below and an experienced structural manager will get back to you within 24 hours.</p>
               
-              <form onSubmit={(e) => e.preventDefault()}>
+              {/* Linked directly to the handleFormSubmit engine rule tracking */}
+              <form onSubmit={handleFormSubmit}>
                 <div className="form-group-row">
                   <div className="input-block">
                     <label htmlFor="name">Your Name *</label>
-                    <input type="text" id="name" placeholder="John Doe" required />
+                    <input 
+                      type="text" 
+                      id="name" 
+                      placeholder="John Doe" 
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required 
+                    />
                   </div>
                   <div className="input-block">
                     <label htmlFor="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="081 234 5678" />
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      placeholder="081 234 5678" 
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                    />
                   </div>
                 </div>
 
                 <div className="input-block">
                   <label htmlFor="email">Email Address *</label>
-                  <input type="email" id="email" placeholder="john@example.com" required />
+                  <input 
+                    type="email" 
+                    id="email" 
+                    placeholder="john@example.com" 
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required 
+                  />
                 </div>
 
                 <div className="input-block">
                   <label htmlFor="message">Project Description *</label>
-                  <textarea id="message" placeholder="Tell us about your custom gates, built-in cupboards, or Nutec housing requirements..." rows="6" required></textarea>
+                  <textarea 
+                    id="message" 
+                    placeholder="Tell us about your custom gates, built-in cupboards, or Nutec housing requirements..." 
+                    rows="6" 
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                  ></textarea>
                 </div>
 
                 <button type="submit" className="submit-btn">
-                  Send Inquiry <FaPaperPlane className="submit-icon" />
+                  Send via WhatsApp <FaPaperPlane className="submit-icon" />
                 </button>
               </form>
             </section>
@@ -147,7 +216,6 @@ const ContactPage = () => {
             <p>Serving Eerste River, Kuils River, and the greater Cape Town area.</p>
           </div>
           <div className="map-frame-container">
-            {/* Added loading="lazy" and structured attributes cleanly */}
             <iframe
               title="Ngcinga Zam Location Map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.289349409!2d18.7309!3d-34.0082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc4b123456789%3A0xabcdef987654321!2s23%20Rier%20Crescent%2C%20Stratford%20Green%2C%20Eerste%20River%2C%20Cape%20Town%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1710000000000!5m2!1sen!2sza"

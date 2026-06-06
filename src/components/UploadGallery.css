@@ -224,3 +224,114 @@
   .gallery-header-pane { flex-direction: column; align-items: stretch; gap: 1.5rem; }
   .upload-dropzone-box { min-width: auto; }
 }
+/* 1. Make sure the container allows overlay elements */
+.media-viewport-wrapper {
+  position: relative; 
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* 2. Position the trash button perfectly in the bottom-right corner */
+.card-overlay-delete {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(255, 68, 68, 0.25); /* Subtle transparent red glassmorphic look */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 10px;
+  border-radius: 50%; /* Makes it a beautiful circular button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  z-index: 10; /* Keeps it layered above the images and videos */
+}
+
+/* 3. Give it a nice glow-up animation when hovered over */
+.card-overlay-delete:hover {
+  background: rgba(255, 51, 51, 0.9); /* Bright red on hover */
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(255, 51, 51, 0.3);
+}
+/* ==========================================================================
+   SMARTPHONE RESPONSIVE LAYER (Max-width: 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  /* 1. Container & Global Layout Reset */
+  .gallery-admin-container {
+    padding: 1.5rem 1rem !important; /* Reduces harsh padding on small screens */
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Header & Typography Sizing */
+  .gallery-header-pane {
+    margin-bottom: 2rem !important;
+    padding-bottom: 1.5rem !important;
+    gap: 1.25rem !important;
+  }
+  
+  .title-block h2 {
+    font-size: 1.6rem !important; /* Keeps the title clear but prevents wrapping awkwardness */
+    letter-spacing: -0.3px;
+  }
+  
+  .title-block p {
+    font-size: 0.9rem !important;
+    line-height: 1.4;
+  }
+
+  /* 3. Drag & Drop Upload Zone Core Fix */
+  .upload-dropzone-box {
+    min-width: 0 !important; /* Removes the 320px minimum boundary that pushes off mobile edges */
+    width: 100% !important;
+    padding: 1.25rem 1rem !important;
+    box-sizing: border-box !important;
+  }
+  
+  .dropzone-label {
+    font-size: 0.85rem !important;
+  }
+  
+  .icon-cloud-drop {
+    font-size: 1.8rem !important; /* Scales down icon slightly for tight display aspect ratios */
+  }
+
+  /* 4. Fluid Asset Grid Adjustment */
+  .gallery-display-grid,
+  .gallery-skeleton-grid {
+    grid-template-columns: 1fr !important; /* Forces single-column stacking for comfortable scrolling target */
+    gap: 1.5rem !important; /* Drops the 2.5rem desktop gap so elements don't space out wildly */
+    width: 100% !important;
+  }
+
+  /* 5. Glass Display Cards & Media Viewports */
+  .gallery-glass-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .media-viewport-wrapper {
+    padding-top: 60% !important; /* Changes the cinematic display ratio slightly for better mobile viewing */
+  }
+
+  /* 6. Meta Footer Realignment */
+  .media-meta-footer {
+    padding: 1rem !important;
+  }
+  
+  .file-name-label {
+    font-size: 0.8rem !important; /* Smaller, truncated baseline text layout */
+    max-width: 180px; /* Enforces strict clipping constraints on ultra-long phone text lines */
+  }
+
+  /* 7. Bottom-Right Absolute Corner Delete Button */
+  .card-overlay-delete {
+    bottom: 10px !important;
+    right: 10px !important;
+    padding: 8px !important; /* Keeps touch targets highly active but matches mobile viewport margins */
+  }
+}

@@ -282,28 +282,169 @@
   font-weight: 600;
   line-height: 1.5;
 }
+/* ==========================================================================
+   COMPREHENSIVE VIEWPORT RESPONSIVITY ENGINE (ABOUT PAGE SECTION)
+   ========================================================================== */
 
-/* VIEWPORT RESPONSIVITY BREAKPOINTS */
-@media (max-width: 900px) {
-  .strategic-pillars {
-    padding: 0;
-  }
-  .strategic-pillars, .story-grid-layout {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  .story-graphic-pane {
-    height: 340px;
-  }
-  .experience-badge {
-    right: 2rem;
-    bottom: -1.5rem;
+/* 1. EXTENDED LAPTOPS & MONITOR VIEWPORTS (1200px and below) */
+@media (max-width: 1200px) {
+  .about-page-container {
+    max-width: 100%;
+    padding: 4rem 3%; /* Provides slight safety padding boundaries */
   }
 }
 
+/* 2. SMALL LAPTOPS & LANDSCAPE TABLETS (1024px Viewports and below) */
+@media (max-width: 1024px) {
+  .about-hero {
+    padding: 8rem 6%; /* Optimizes hero breathing room */
+  }
+
+  .about-hero h1 {
+    font-size: 2.7rem; /* Compresses large text headings */
+  }
+
+  .strategic-pillars {
+    gap: 1.8rem;
+    padding: 1.5rem; /* Scales the frosted background overlay wrapper boundary */
+  }
+
+  .pillar-card {
+    padding: 2.5rem 2rem; /* Softens interior padding inside glass columns */
+  }
+
+  .values-grid {
+    /* Transitions columns into a fluid 2x2 grid layout block */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1.5rem;
+  }
+
+  .story-grid-layout {
+    gap: 2.5rem; /* Pulls the brand story layout closer together */
+  }
+
+  .story-graphic-pane {
+    height: 420px;
+  }
+}
+
+/* 3. PORTRAIT TABLETS (768px to 900px Viewports and below) */
+@media (max-width: 900px) {
+  .about-hero {
+    padding: 7rem 5%;
+  }
+
+  .about-hero h1 {
+    font-size: 2.4rem;
+  }
+
+  /* Reflows the structural two-column components into spacious stacked rows */
+  .strategic-pillars, 
+  .story-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .strategic-pillars {
+    padding: 0;
+    background: none; /* Disables the back layer image pattern to save screen room */
+  }
+
+  .pillar-card {
+    padding: 3rem 2rem;
+  }
+
+  .story-graphic-pane {
+    height: 360px;
+    /* Keeps the banner inside the core boundaries on tablet grid resets */
+    max-width: 100%; 
+  }
+
+  .experience-badge {
+    right: 2rem;
+    bottom: -1.5rem; /* Converts badge coordinates to fit neatly beneath the photo section */
+  }
+}
+
+/* 4. LARGE SMARTPHONES & SMALL TABLETS (600px Viewports and below) */
 @media (max-width: 600px) {
-  .about-page-container { padding: 3rem 1rem; }
-  .about-hero h1 { font-size: 2.2rem; }
-  .values-section { padding: 3rem 1.5rem; }
-  .experience-badge { display: none; }
+  .about-page-container {
+    padding: 3rem 1.2rem;
+  }
+
+  .about-hero {
+    padding: 6rem 1.2rem;
+    text-align: center; /* Alters text orientation for optimal mobile UI balance */
+  }
+
+  .about-hero .hero-content {
+    margin: 0 auto;
+  }
+
+  .about-hero h1 {
+    font-size: 2.1rem;
+    line-height: 1.25;
+  }
+
+  .section-title-wrapper h2 {
+    font-size: 1.7rem;
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+  }
+
+  .overview-content p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .pillar-card {
+    padding: 2.2rem 1.5rem; /* Compact glass cards to secure safe viewing lanes */
+  }
+
+  .values-section {
+    padding: 3rem 1.5rem;
+    border-radius: 16px; /* Smooths down edge curves for smaller display modules */
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr; /* Drops glass value nodes into a clean single line file */
+    gap: 1.2rem;
+  }
+
+  .value-item-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .story-graphic-pane {
+    height: 280px;
+  }
+
+  /* Safely hides absolute badges on phones to prevent clipping over text elements */
+  .experience-badge {
+    display: none; 
+  }
+
+  .story-text-pane blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    font-size: 1rem;
+  }
+}
+
+/* 5. TINY SMARTPHONES (380px Viewports and below) */
+@media (max-width: 380px) {
+  .about-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .section-title-wrapper h2 {
+    font-size: 1.5rem;
+    flex-wrap: wrap; /* Keeps header utility icons from clipping past words */
+  }
+
+  .story-graphic-pane {
+    height: 220px;
+  }
 }

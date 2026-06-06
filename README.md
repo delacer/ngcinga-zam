@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Ngcinga Zam (Pty) Ltd — Digital Platform & Client Portal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, high-contrast digital platform built for **Ngcinga Zam (Pty) Ltd**, a premier structural carpentry, custom gate, and housing services provider operating out of Cape Town, South Africa. This repository hosts the lightweight, mobile-first frontend implementation featuring a premium dark-mode glassmorphic interface, interactive quote pipelines, dynamic client testimonials tracking, and secure direct-to-WhatsApp messaging integration.
 
-## Available Scripts
+## 🚀 Key Architectural Features
 
-In the project directory, you can run:
+- **Premium UI Experience:** Implements an advanced structural design configuration token system utilizing deep slates, high-contrast whites, and vibrant brand orange highlights.
+- **Glassmorphic Components:** Leverages blurred backdrop layers (`backdrop-filter`) and thin micro-borders to deliver a high-end industrial visual layout.
+- **Interactive Review Engine:** Includes a modern dark-mode feedback portal containing an interactive star-rating selector framework and material-style floating label inputs.
+- **Automated WhatsApp Pipeline:** Standardizes input data attributes from the free quote module into clean, highly-legible markdown blocks, mapping characters through an encoded URL structure directly to core operations management.
+- **Comprehensive Legal Framework:** Incorporates complete production-ready, fully responsive paths for both the corporate Privacy Policy and Terms of Service agreements.
+- **Fluid Layout Layering:** Built entirely around mobile-first CSS grids and flexible breakpoint compression strategies to ensure zero-clipping displays across modern viewport sizes.
 
-### `npm start`
+## 🛠️ Technology Stack & Dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Core Framework:** React (with functional components and structural state hooks)
+- **Routing Engine:** React Router DOM (`BrowserRouter`, `Link`)
+- **Icon Assets Library:** React Icons (Font Awesome framework)
+- **Styling Architecture:** Plain CSS3 with native `:root` variable design tokens
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📦 Project Directory Structure
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+cinga
+├── public/
+│   └── home.jpeg                  # all images
+├── src/
+│   ├── components/
+│   │   ├── ContactPage.jsx        # Quote form pipeline with WhatsApp redirect logic
+│   │   ├── ContactPage.css        # Layout mapping for communication panels
+│   │   ├── PrivacyPolicyPage.jsx  # Personal metadata processing rules module
+│   │   ├── TermsOfServicePage.jsx # General usage rules & liability limitations
+│   │   └── LegalPages.css         # Shared glassmorphic stylesheet for legal views
+│   ├── App.js                   # Core route switching configuration engine
+│   ├── index.css                  # Core entry styles and global variable token layer
+│   └── index.js                 # React application entry target point
+├── package.json                   # Dependency configuration matrix
+└── README.md                      # This project documentation roadmap

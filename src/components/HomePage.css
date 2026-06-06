@@ -21,6 +21,52 @@
   background-color: var(--white);
   overflow-x: hidden;
 }
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 8%;
+  background: var(--white);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.navbar .logo h2 {
+  font-weight: 800;
+  color: var(--secondary-color);
+  margin: 0;
+}
+.navbar .logo h2 span {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+.navbar .links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.navbar .links a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+.navbar .links a:hover, .navbar .links a.active {
+  color: var(--primary-color);
+}
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary-color);
+}
 
 /* HERO MASTHEAD SECTION STYLING */
 .hero-section {
@@ -109,18 +155,64 @@
   transform: translateY(-3px);
 }
 
-/* TRIPLE BOTTOM SERVICE SNAPSHOT HIGHLIGHT CARDS */
+/* ==========================================================================
+   TRIPLE BOTTOM SERVICE SNAPSHOT HIGHLIGHT CARDS
+   ========================================================================== */
 .service-snapshot-wrapper {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  /* Explicitly enforces 3 equal columns */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem; /* Slightly reduced gap to prevent overcrowding on smaller desktops */
   max-width: 1200px;
   width: 100%;
   margin: 0 auto -5rem auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   box-sizing: border-box;
+}
+
+/* ==========================================================================
+   COMPREHENSIVE RESPONSIVE DESIGN VIEWPORT LAYERS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-text h1 { font-size: 2.8rem; }
+  
+  /* REMOVED .service-snapshot-wrapper from here so it STAYS in 3 columns */
+  .featured-projects-grid, 
+  .choose-us-glass-grid, 
+  .testimonials-masonry-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  
+  
+  .about-preview-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-preview-graphic { height: 320px; }
+
+  /* Added a tailored tweak for the snapshot cards on smaller desktop/tablet screens */
+  .service-snapshot-wrapper {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  .snap-content {
+    padding: 1.5rem 1rem; /* Breathes better on smaller tablet widths */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-text { margin-left: 5%; }
+  .hero-text h1 { font-size: 2.3rem; }
+  
+  /* On mobile smartphones, they will cleanly stack vertically for better UI/UX */
+  .service-snapshot-wrapper {
+    grid-template-columns: 1fr;
+    margin-bottom: 0;
+    position: static;
+    padding: 3rem 1.5rem 0 1.5rem;
+  }
+  
+  
 }
 .service-snap-card {
   background-color: var(--white);
@@ -216,9 +308,11 @@
 }
 .about-preview-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 4.5rem;
+  grid-template-columns: 1fr; /* FIXED: Changes layout from side-by-side to a single vertical column */
+  gap: 3.5rem;               /* Slightly reduced gap for a tighter vertical rhythm */
   align-items: center;
+  max-width: 800px;          /* Optional: Centers and keeps text line-lengths readable when full-width */
+  margin: 0 auto;
 }
 .about-preview-graphic {
   position: relative;
@@ -360,77 +454,361 @@
   color: #cbd5e1; font-size: 0.98rem; line-height: 1.6; margin: 0;
 }
 
-/* TESTIMONIALS SECTION STYLE GRID */
+/* ==========================================================================
+   MODERN HIGH-CONTRAST REWORK: TESTIMONIAL CARDS & FORM INTERFACE
+   ========================================================================== */
+
+/* 1. UPGRADED TESTIMONIAL ITEM CARDS */
 .testimonials-section {
   padding: 7rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .testimonials-masonry-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
 }
+
 .testimonial-item-card {
-  background-color: var(--bg-ultra-light);
+  position: relative;
+  background: var(--white);
   border: 1px solid #e2e8f0;
-  padding: 2.5rem 2rem;
-  border-radius: 16px;
+  padding: 3rem 2.2rem 2.5rem 2.2rem;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: var(--smooth-animation);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
+
+/* Luxury accent top indicator border on hover */
+.testimonial-item-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 4px;
+  background: linear-gradient(90deg, transparent, var(--brand-orange), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
 .testimonial-item-card:hover {
-  background-color: var(--white);
-  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.09);
   border-color: #cbd5e1;
 }
+
+.testimonial-item-card:hover::before {
+  opacity: 1;
+}
+
+/* Header Elements Positioning */
 .quote-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
+
 .quote-icon-mark {
-  color: rgba(242, 100, 25, 0.15);
-  font-size: 2rem;
+  color: rgba(242, 100, 25, 0.12);
+  font-size: 2.8rem;
+  font-family: serif;
+  line-height: 0.1;
+  margin-top: 1rem;
 }
+
 .star-rating-line {
-  display: flex; gap: 0.2rem;
+  display: flex;
+  gap: 0.25rem;
 }
+
 .star-element {
-  color: #ffb703; font-size: 0.9rem;
+  color: #ffb703;
+  font-size: 1.05rem;
+  filter: drop-shadow(0 2px 4px rgba(255, 183, 3, 0.25));
 }
+
+/* Card Body Typography Typography */
 .testimonial-body-text {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.65;
   color: var(--text-body);
   font-style: italic;
-  margin: 0 0 2rem 0;
+  margin: 0 0 2.2rem 0;
+  font-weight: 400;
+  flex-grow: 1;
 }
+
+/* User Identity Info Footer */
 .testimonial-user-footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  border-top: 1px solid #e2e8f0;
-  padding-top: 1.2rem;
-}
-.user-profile-signature h4 {
-  font-size: 1.1rem; color: var(--dark-charcoal); margin: 0; font-weight: 700;
-}
-.user-profile-signature span {
-  font-size: 0.8rem; color: #64748b; font-weight: 600;
-}
-.project-tag-badge {
-  background-color: rgba(47, 72, 88, 0.06);
-  color: var(--steel-slate);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
+  align-items: center;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1.5rem;
+  margin-top: auto;
 }
 
+.user-profile-signature h4 {
+  font-size: 1.15rem;
+  color: var(--dark-charcoal);
+  margin: 0 0 0.2rem 0;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.user-profile-signature span {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-tag-badge {
+  background-color: rgba(242, 100, 25, 0.06);
+  color: var(--brand-orange);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px; /* Modern pill capsule layout design */
+  letter-spacing: 0.2px;
+}
+
+
+/* 2. PREMIUM TESTIMONIAL FORM AREA REWORK */
+.review-portal-section {
+  padding: 100px 24px;
+  background: var(--bg-deep-slate);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(242, 100, 25, 0.08), transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(47, 72, 88, 0.15), transparent 40%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Advanced Dark Mode Glass Frame */
+.portal-glass-card {
+  width: 100%;
+  max-width: 680px;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 4px solid var(--brand-orange);
+  border-radius: 24px;
+  padding: 55px 50px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.portal-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.portal-icon-badge {
+  width: 55px;
+  height: 55px;
+  background: rgba(242, 100, 25, 0.1);
+  border: 1px solid rgba(242, 100, 25, 0.25);
+  color: var(--brand-orange);
+  border-radius: 16px; /* Squircle appearance layout framing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 1.3rem;
+  box-shadow: 0 8px 20px rgba(242, 100, 25, 0.1);
+}
+
+.portal-header h2 {
+  font-size: 2.2rem;
+  color: var(--white);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 10px 0;
+}
+
+.portal-header p {
+  color: #94a3b8;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.form-accent-divider {
+  width: 50px;
+  height: 4px;
+  background: var(--brand-orange);
+  margin: 22px auto 0;
+  border-radius: 2px;
+}
+
+/* Custom Floating Input Architecture Mapping */
+.premium-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.form-fields-twin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.floating-input-group {
+  position: relative;
+  width: 100%;
+}
+
+.floating-input-group input,
+.floating-input-group textarea {
+  width: 100%;
+  padding: 18px 16px;
+  background: rgba(11, 17, 30, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: var(--white);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.25s ease-in-out;
+  box-sizing: border-box;
+}
+
+.floating-input-group label {
+  position: absolute;
+  left: 16px;
+  top: 18px;
+  color: #64748b;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Material Floating Focus Framework Handles */
+.floating-input-group input:focus,
+.floating-input-group textarea:focus {
+  border-color: var(--brand-orange);
+  background: rgba(11, 17, 30, 0.8);
+  box-shadow: 0 0 0 4px rgba(242, 100, 25, 0.15);
+}
+
+.floating-input-group input:focus + label,
+.floating-input-group input:not(:placeholder-shown) + label,
+.floating-input-group textarea:focus + label,
+.floating-input-group textarea:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 12px;
+  font-size: 0.8rem;
+  color: var(--brand-orange);
+  background: #0f172a; /* Blends seamlessly back over the edge boundary lines */
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Luxury Interactive Clickable Star Bar UI Component */
+.star-rating-selector-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  padding: 16px 20px;
+  border-radius: 12px;
+}
+
+.rating-selector-label {
+  color: #cbd5e1;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.interactive-stars-row {
+  display: flex;
+  gap: 8px;
+}
+
+.interactive-star-icon {
+  font-size: 1.7rem;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.15s ease;
+}
+
+.star-trigger-btn:hover .interactive-star-icon {
+  transform: scale(1.25);
+}
+
+.active-gold {
+  color: #ffbc00;
+  filter: drop-shadow(0 0 6px rgba(255, 188, 0, 0.5));
+}
+
+.dimmed-gray {
+  color: rgba(255, 255, 255, 0.12);
+}
+
+/* Premium Form Submit Button Interaction Design */
+.premium-form-submit-btn {
+  background: var(--brand-orange);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px rgba(242, 100, 25, 0.25);
+  margin-top: 10px;
+}
+
+.premium-form-submit-btn:hover {
+  background: #ff7529;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(242, 100, 25, 0.4);
+}
+
+.premium-form-submit-btn:active {
+  transform: translateY(-1px);
+}
+
+
+/* ==========================================================================
+   FORM AND RESPONSIVE INTERFACE COMPRESSION
+   ========================================================================== */
+@media (max-width: 680px) {
+  .portal-glass-card {
+    padding: 40px 24px;
+    border-radius: 20px;
+  }
+  
+  .portal-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .form-fields-twin-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  
+  .star-rating-selector-wrapper {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px;
+  }
+}
 /* CONTACT CALLOUT ACCENT PANEL */
 .contact-callout-panel {
   padding: 0 2rem 6rem 2rem;
@@ -467,19 +845,6 @@
   box-shadow: 0 15px 30px rgba(242, 100, 25, 0.4);
 }
 
-/* COMPREHENSIVE RESPONSIVE DESIGN VIEWPORT LAYERS */
-@media (max-width: 1024px) {
-  .hero-text h1 { font-size: 2.8rem; }
-  .service-snapshot-wrapper, .featured-projects-grid, 
-  .choose-us-glass-grid, .testimonials-masonry-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .testimonials-masonry-grid .testimonial-item-card:last-child {
-    grid-column: span 2;
-  }
-  .about-preview-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .about-preview-graphic { height: 320px; }
-}
 
 @media (max-width: 768px) {
   .hero-text { margin-left: 5%; }
@@ -504,4 +869,233 @@
   .call-btn-group a { width: 100%; justify-content: center; }
   .callout-inner-content { padding: 3rem 1rem; }
   .callout-inner-content h2 { font-size: 1.6rem; }
+}
+/* Premium Review Section Layout Wrapper */
+.review-portal-section {
+  padding: 80px 24px;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.05), transparent 60%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Glassmorphic Form Card Frame */
+.portal-glass-card {
+  width: 100%;
+  max-width: 680px;
+  background: rgba(20, 20, 22, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 45px 40px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.portal-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.portal-icon-badge {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 122, 0, 0.15);
+  border: 1px solid rgba(255, 122, 0, 0.3);
+  color: #ff7a00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 1.2rem;
+}
+
+.portal-header h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.portal-header p {
+  color: #a0a0aa;
+  font-size: 0.95rem;
+}
+
+.form-accent-divider {
+  width: 60px;
+  height: 3px;
+  background: #ff7a00;
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+/* Input Fields & Layout Engine */
+.premium-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-fields-twin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .form-fields-twin-grid {
+    grid-template-columns: 1fr;
+  }
+  .portal-glass-card {
+    padding: 30px 20px;
+  }
+}
+
+/* Material Design Style Floating Labels */
+.floating-input-group {
+  position: relative;
+  width: 100%;
+}
+
+.floating-input-group input,
+.floating-input-group textarea {
+  width: 100%;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.floating-input-group textarea {
+  resize: none;
+}
+
+.floating-input-group label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: #71717a;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Float logic triggers when user types or focused */
+.floating-input-group input:focus,
+.floating-input-group textarea:focus {
+  border-color: #ff7a00;
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.15);
+}
+
+.floating-input-group input:focus + label,
+.floating-input-group input:not(:placeholder-shown) + label,
+.floating-input-group textarea:focus + label,
+.floating-input-group textarea:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 12px;
+  font-size: 0.8rem;
+  color: #ff7a00;
+  background: #18181b;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Clickable Star Engine Container */
+.star-rating-selector-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.rating-selector-label {
+  color: #d4d4d8;
+  font-size: 0.95rem;
+}
+
+.interactive-stars-row {
+  display: flex;
+  gap: 6px;
+}
+
+.star-trigger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+.interactive-star-icon {
+  font-size: 1.45rem;
+  transition: transform 0.1s ease, color 0.1s ease;
+}
+
+.star-trigger-btn:hover .interactive-star-icon {
+  transform: scale(1.2);
+}
+
+.active-gold {
+  color: #ffbc00;
+  filter: drop-shadow(0 0 4px rgba(255, 188, 0, 0.4));
+}
+
+.dimmed-gray {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* High-Contrast Luxury Action Button */
+.premium-form-submit-btn {
+  background: #ff7a00;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 14px rgba(255, 122, 0, 0.3);
+  margin-top: 8px;
+}
+
+.premium-form-submit-btn:hover {
+  background: #e06a00;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.4);
+}
+
+.premium-form-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Card Delete Override style consistency */
+.review-delete-btn-overlay {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  z-index: 5;
+  transition: color 0.2s;
 }
